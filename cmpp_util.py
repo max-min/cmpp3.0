@@ -25,20 +25,24 @@ class cmppUtil():
 	static_sequenceId = 0;
 
 	# 获取序列号
-	def static_getSequenceId(self):
+	@staticmethod
+	def getSequenceId(self):
 		return cmppUtil.static_sequenceId++
 
 
 	# 生成时间戳明文格式 MMDDHHMMSS 
-	def static_getTimestamp(self):
+	@staticmethod
+	def getTimestamp(self):
 		pass 
 
 	# 生成MD5 source_addr + 9字节0 + secret + timestamp
-	def static_getAuthenticatorSource(self, sp_id, secret):
+	@staticmethod
+	def getAuthenticatorSource(self, sp_id, secret):
 		pass
 
 	#写入指定长度的字符串，不足补0
-	def static writeString(self, fd, msgbuffer, msglen):
+	@staticmethod
+	def writeString(self, fd, msgbuffer, msglen):
 		pass
 
 

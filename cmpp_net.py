@@ -8,17 +8,7 @@
 
 import socket 
 
-class cmppNetService(object):
-	def __init__(self)
-		self.ip = '127.0.0.1'
-		self.port = 10086
-
-
-	def setAddr(ip, port):
-		self.ip = ip
-		self.port = port
-
-
+class cmppNet(object):
 
 	'''
 		@remarks:创建socket服务端服务 
@@ -26,6 +16,7 @@ class cmppNetService(object):
 		@port   监听端口
 		@callbackFunc 收到消息的回调接口
 	'''
+	@staticmethod
 	def startTcpService(flags, port, callbackFunc):
 		pass
 
@@ -35,6 +26,7 @@ class cmppNetService(object):
 		@ip/port: 需要连接的ip和端口信息
 		@callbackFunc 收到消息的回调接口
 	'''
+	@staticmethod
 	def startTcpClient(flags, ip , port, callbackFunc):
 		sockFd = 0;
 		if flags == 0:
@@ -46,16 +38,19 @@ class cmppNetService(object):
 			sockFd.connect((ip, port))
 		except socket.error as e:
 			print('connect error')
-			pass
+		
+		return sockFd
 		
 
 
 	'''
 		发送消息
 	'''
+	@staticmethod
 	def sendMsg(sockFd, msg, len):
 		pass 
 
+	@staticmethod
 	def recvMsg(sockFd, msg, len):
 		pass 
 

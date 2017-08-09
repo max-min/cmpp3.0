@@ -28,6 +28,7 @@ class cmppManager(object):
 				#activeTTest
 			else :
 				print('connected ISMG failed')
+				connectedISMG = False
 				return -1 
 		if cmppHandle.sendMessage(message, number) == 0 :
 			print("send message success")

@@ -39,6 +39,6 @@ class cmppConnect(cmppHeader):
 
 	#字节流的形式写入buffer
 	def writeToByteBuffer():
-		return struck.pack('iii6s16sci', self.getTotalLength(), self.getCommandId(), self.getSequenceId(),
+		return struck.pack('!iii6s16sci', self.getTotalLength(), self.getCommandId(), self.getSequenceId(),
 			self.getSourceAddr(), self.getAuthenticatorSource(), self.getCMPPVersion(), self.getTimestamp())
 

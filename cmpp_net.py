@@ -36,8 +36,8 @@ class cmppNet(object):
 
 		try:
 			sockFd.connect((ip, port))
-		except socket.error as e:
-			print('connect error')
+		except socket.error, msg:
+    		print 'Failed to  connect [' +ip ', '+ port +'], Error code: ' + str(msg[0]) + ' , Error message : ' + msg[1]
 		
 		return sockFd
 		

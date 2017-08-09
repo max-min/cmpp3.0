@@ -17,11 +17,12 @@ class cmppHandle(object):
 			connObj.setSourceAddr(cmppManager.getSPID())
 			connObj.setAuthenticatorSource(cmppUtil.getAuthenticatorSource(cmppManager.getSPID(), cmppManager.getPassword()))
 			
-			connObj.setVersion(0x0F)
-			connObj.setTimestamp(MMDDHHMMSS)
+			connObj.setVersion(CMPP_VERSION)
+			connObj.setTimestamp(time.strftime('%m%d%H%M%S', time.localtime(time.time())))
 		else:
 			print("conenct error:" + ip + ", " + port)
-			rzturn -1
+			return -1
 
-		sendObje = cmppSender(sockFd, message)
-		
+		message = connObj.writeToByteBuffer()
+		sendObjc = cmppSender(sockFd, message)
+		return sendObjc.sendService()

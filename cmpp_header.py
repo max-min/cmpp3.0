@@ -9,8 +9,10 @@
 '''
 
 class cmppHeader(object):
-	def __init__(self):
-		pass
+	def __init__(self, recvMessage):
+		self.setTotalLength(struct.upack('!I', recvMessage[0:4]))
+		self.setCommanId(struct.upack('!I', recvMessage[4:8]))
+		self.setSequence_id(struct.upack('!I', recvMessage[8:12]))
 
 	#
 	def getTotalLength(self):

@@ -1,9 +1,9 @@
 
-
-
+import cmpp_handle
 
 class cmppManager(object):
 
+	connectedISMG = False
 	'''
  	@cmpp需要的配置信息
 	'''
@@ -21,14 +21,14 @@ class cmppManager(object):
 	'''
 	@staticmethod
 	def submitMessage(message, number):
-		if connectedISMG != True:
-			initConfig()
+		if cmppManager.connectedISMG != True:
+			cmppManager.initConfig()
 			if cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT) == 0:
-				connectedISMG = True
+				cmppManager.connectedISMG = True
 				#activeTTest
 			else :
 				print('connected ISMG failed')
-				connectedISMG = False
+				cmppManager.connectedISMG = False
 				return -1 
 		if cmppHandle.sendMessage(message, number) == 0 :
 			print("send message success")

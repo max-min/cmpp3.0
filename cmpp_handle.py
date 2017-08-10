@@ -26,3 +26,7 @@ class cmppHandle(object):
 		message = connObj.writeToByteBuffer()
 		sendObjc = cmppSender(sockFd, message)
 		return sendObjc.sendService()
+
+	@staticmethod
+	def sendMessage():
+		pass 

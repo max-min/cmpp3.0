@@ -1,5 +1,7 @@
 
-import cmpp_handle
+from cmpp_handle import *
+from cmpp_net  import *
+
 
 class cmppManager(object):
 

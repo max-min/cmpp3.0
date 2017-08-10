@@ -36,16 +36,13 @@ class cmppHeader(object):
 
 
 	# 字节流的形式写入buffer
-	def writeToByteBufferr():
-		return struct.pack("iii", self.total_length, self.command_id, self.sequence_id)
+	def writeToByteBufferr(self):
+		return struct.pack("!III", self.total_length, self.command_id, self.sequence_id)
 
 	
 	# 读取字节流中的int类型
-    def readToByteBufferr(resp_msg):
-    	resp = struc.upack()
-    	self.total_length = resp[0]
-    	self.command_id   = resp[1]
-    	self.sequence_id  = resp[2]
+	def readToByteBufferr(self, resp_msg):
+		self.total_length,self.command_id,self.sequence_id=struct.upack('!III', resp_msg)
 
 
 

@@ -27,17 +27,18 @@ class cmppNet(object):
 		@callbackFunc 收到消息的回调接口
 	'''
 	@staticmethod
-	def startTcpClient(flags, ip , port, callbackFunc):
+	def startTcpClient(flags, ip, port, callbackFunc):
 		sockFd = 0;
 		if flags == 0:
 			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_STREAM)
 		else:
-			sockFd = ssocket.socket(socket.AF_INET, socket.SOCKET_DGRAM)
+			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_DGRAM)
 
 		try:
 			sockFd.connect((ip, port))
-		except socket.error, msg:
-    		print 'Failed to  connect [' +ip ', '+ port +'], Error code: ' + str(msg[0]) + ' , Error message : ' + msg[1]
+		except socket.error:
+			print('Failed to connect')
+			sockFd = -1
 		
 		return sockFd
 		

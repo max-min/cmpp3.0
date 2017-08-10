@@ -6,8 +6,9 @@
 class cmppConnect(cmppHeader):
 
 	def __init__(self):
-		pass 
+		super.__init__()
 
+		
 	# 源地址 也就是企业代码 sp_id
 	def getSourceAddr(self):
 		return self.souce_addr 
@@ -38,7 +39,7 @@ class cmppConnect(cmppHeader):
 
 
 	#字节流的形式写入buffer
-	def writeToByteBuffer():
+	def writeToByteBuffer(self):
 		return struck.pack('!iii6s16sci', self.getTotalLength(), self.getCommandId(), self.getSequenceId(),
 			self.getSourceAddr(), self.getAuthenticatorSource(), self.getCMPPVersion(), self.getTimestamp())
 

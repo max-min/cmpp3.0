@@ -25,14 +25,15 @@ class cmppManager(object):
 	def submitMessage(message, number):
 		if cmppManager.connectedISMG != True:
 			cmppManager.initConfig()
-			if cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT) == 0:
+			sockFd = cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT)
+			if  sockFd <= 0:
 				cmppManager.connectedISMG = True
 				#activeTTest
 			else :
 				print('connected ISMG failed')
 				cmppManager.connectedISMG = False
 				return -1 
-		if cmppHandle.sendMessage(message, number) == 0 :
+		if cmppHandle.sendMessage(sockFd, message, number) == 0 :
 			print("send message success")
 		else:
 			print("send message failed")

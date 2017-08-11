@@ -29,4 +29,5 @@ class cmppHandle(object):
 
 	@staticmethod
 	def sendMessage():
+		
 		pass 

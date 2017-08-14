@@ -5,7 +5,7 @@ from cmpp_net  import *
 
 class cmppManager(object):
 
-	connectedISMG = False
+	cmppManager.connectedISMG = False
 	'''
  	@cmpp需要的配置信息
 	'''

@@ -43,7 +43,7 @@ class cmppHandle(object):
 		#body
 		submitObj.setMsgId(0x00)
 		submitObj.setPk_total(0x01)
-		submitObj.setPk_number((byte)0x01)			
+		submitObj.setPk_number(0x01)			
 		submitObj.setRegistered_Del(0x00)
 		submitObj.setMsg_level(0x01)
 

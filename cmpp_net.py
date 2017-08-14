@@ -83,11 +83,13 @@ class cmppNet(object):
 		发送消息
 	'''
 	@staticmethod
-	def sendMsg(sockFd, msg, len):
-		pass 
+	def sendMsg(sockFd, msg):
+		sockFd.sendall(msg)
+
 
 	@staticmethod
-	def recvMsg(sockFd, msg, len):
-		pass 
+	def recvMsg(sockFd, msg, lens):
+		msg = sockFd.recv(lens)
+		return lens
 
 	

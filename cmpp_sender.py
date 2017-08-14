@@ -17,9 +17,19 @@ class cmppSender(object):
 		else:
 			print('socket or message error, sockfd=' + sockFd + 'messsage:' + message)
 			return -1
+		#接收消息头
+		msglen = cmppNet.recvMsg(sockFd, heademsg, 12)
+		if msglen == 12:
+			bodylen = struct.upack('!I', heademsg[0:4]) - 12
+		else:
+			print('recv msg header error: headlen = ' + msglen)
+			return -1
 
-		if cmppNet.recvMsg(sockFd, RecvMessage, msgLen)  > 0:
-			if msgLen > 8:
+
+		bodylen = cmppNet.recvMsg(sockFd, bodymsg, bodylen)
+		if bodylen > 0:
+			RecvMessage = heademsg + bodymsg
+			if len(RecvMessage) > 8:
 				recvHeader = cmppHeader(RecvMessage)
 				if( recvHeader.getCommandId() == CMPP_CONNECT_RESP):
 					connectResp = cmppConnectResp(RecvMessage)

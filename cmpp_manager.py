@@ -28,13 +28,15 @@ class cmppManager(object):
 			sockFd = cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT)
 			if  sockFd <= 0:
 				cmppManager.connectedISMG = True
-				#activeTTest
+				#认证成功后，开启新的现场进行保活处理
+				cmppHandle.service()
 			else :
 				print('connected ISMG failed')
 				cmppManager.connectedISMG = False
 				return -1 
 		if cmppHandle.sendMessage(sockFd, message, number) == 0 :
 			print("send message success")
+
 		else:
 			print("send message failed")
 

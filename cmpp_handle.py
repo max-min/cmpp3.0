@@ -1,4 +1,5 @@
 
+import threading
 
 '''
  cmpp 认证和短信的主要处理接口实现
@@ -78,7 +79,7 @@ class cmppHandle(object):
 	@staticmethod
 	def sendActiveTest(sockFd):
 		activeTestObj = cmppActiveTest()
-		active.setTotalLength(12) #消息总长度，级总字节数:4+4+4(消息头)
+		active.setTotalLength(12) #消息总长度，总字节数:4+4+4(消息头)
 		active.setCommandId(CMPP_ACTIVE_TEST) 
 		active.setSequenceId(cmppUtil.getSequenceId()) #序列，由我们指定
 
@@ -101,5 +102,19 @@ class cmppHandle(object):
 		sendObjc = cmppSender(sockFd, activeRespMessage)
 		return sendObjc.sendService()
 		
+
+
+	##心跳服务
+	def service():
+		thread_list =[]
+		thread1 = threading.Thread(target=cmppHandle.sendActiveTest, args='')
+		thread_list.append(thread1)
+
+		for t in thread_list:
+			a.start()
+
+
+
+
 
 

@@ -2,7 +2,7 @@
 '''
 	向短信网关发送认证请求
 '''
-
+from cmpp_header import * 
 class cmppConnect(cmppHeader):
 
 	def __init__(self):

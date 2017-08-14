@@ -4,6 +4,7 @@
 	@向ISMG发送保活心跳
 
 '''
+from cmpp_header import * 
 class cmppActiveTest(cmppHeader):
 	def __init__(self):
 		pass 
@@ -16,4 +17,4 @@ class cmppActiveTest(cmppHeader):
 
 
 
-	
+

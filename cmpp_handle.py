@@ -1,9 +1,11 @@
 
-import threading
+
 
 '''
  cmpp 认证和短信的主要处理接口实现
 '''
+import threading
+from cmpp_net import *
 class cmppHandle(object):
 
 
@@ -22,7 +24,7 @@ class cmppHandle(object):
 			connObj.setVersion(CMPP_VERSION)
 			connObj.setTimestamp(time.strftime('%m%d%H%M%S', time.localtime(time.time())))
 		else:
-			print("conenct error:" + ip + ", " + port)
+			print("conenct error:" + ip + ", " + str(port))
 			return -1
 
 		conncMessage = connObj.writeToByteBuffer()
@@ -111,7 +113,7 @@ class cmppHandle(object):
 		thread_list.append(thread1)
 
 		for t in thread_list:
-			a.start()
+			t.start()
 
 
 

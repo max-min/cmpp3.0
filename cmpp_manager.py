@@ -5,7 +5,7 @@ from cmpp_net  import *
 
 class cmppManager(object):
 
-	cmppManager.connectedISMG = False
+	connectedISMG = False
 	'''
  	@cmpp需要的配置信息
 	'''
@@ -39,7 +39,6 @@ class cmppManager(object):
 
 		else:
 			print("send message failed")
-
 
 	#网关IP
 	@staticmethod

@@ -2,12 +2,14 @@
 '''
 	@ 认证成功后解析处理回应状态
 '''
+from cmpp_header import * 
 dictStatus = {0:'正确', 1:'消息结构错误', 2:'非法源地址', 3:'认证错', 4:'版本太高', 5:'其他错误'}
 
 class cmppConnectResp(cmppHeader):
-	def __init(self, RespMessage):
-        if len(RespMessage) == (12+4+16+1):
 
+    def __init__(self, RespMessage):
+        sureLen=12+4+16+1
+        if len(RespMessage) == sureLen:
             self.setTotalLength(struct.unpack('!I', RespMessage[0:4]))
             self.setCommanId(struct.unpack('!I', RespMessage[4:8]))
             self.setSequence_id(struct.unpack('!I', RespMessage[8:12]))

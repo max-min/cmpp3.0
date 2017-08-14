@@ -17,6 +17,10 @@ class cmppNet(object):
 		@port   监听端口
 		@callbackFunc 收到消息的回调接口
 	'''
+	#监听地址信息
+	listenList = []
+	#连接地址信息
+	connectList = []
 	@staticmethod
 	def startTcpService(flags, port, callbackFunc):
 		for i in range(len(cmppNet.listenList)):
@@ -29,9 +33,9 @@ class cmppNet(object):
 
 		sockFd = 0;
 		if flags == 0:
-			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_STREAM)
+			sockFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		else:
-			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_DGRAM)
+			sockFd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 		try:
 			sockFd.bind(('127.0.0.1', port))
@@ -40,10 +44,10 @@ class cmppNet(object):
 			sockFd = -1
 		sockFd.listen(10)
 		# create a thread to accept 
-		 '''
+		'''
 			while True 
 				connct, addr  = sockFd.accept()
-		 '''
+		'''
 		tup = (port, sockFd)
 		cmppNet.listenList.append(tup)
 		return sockFd
@@ -64,9 +68,9 @@ class cmppNet(object):
 
 		sockFd = 0;
 		if flags == 0:
-			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_STREAM)
+			sockFd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		else:
-			sockFd = socket.socket(socket.AF_INET, socket.SOCKET_DGRAM)
+			sockFd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 		try:
 			sockFd.connect((ip, port))

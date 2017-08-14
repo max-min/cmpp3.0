@@ -24,18 +24,18 @@ class cmppHandle(object):
 			connObj.setVersion(CMPP_VERSION)
 			connObj.setTimestamp(time.strftime('%m%d%H%M%S', time.localtime(time.time())))
 		else:
-			print("conenct error:" + ip + ", " + str(port))
-			return -1
+			print("connectISMG conenct error:" + ip + ", " + str(port))
+			return -1, 0
 
 		conncMessage = connObj.writeToByteBuffer()
 		sendObjc = cmppSender(sockFd, conncMessage)
-		return sendObjc.sendService()
+		return sendObjc.sendService(),sockFd
 
 	# 发送短信
 	@staticmethod
 	def sendMessage(sockFd, message, number):
 		if sockFd <= 0 or message == '' or number == '':
-			print('param error')
+			print('sendMessage param error')
 			return -1
 
 		submitObj = cmppSubmit()
@@ -80,15 +80,18 @@ class cmppHandle(object):
 	#心跳保活连接
 	@staticmethod
 	def sendActiveTest(sockFd):
-		activeTestObj = cmppActiveTest()
-		active.setTotalLength(12) #消息总长度，总字节数:4+4+4(消息头)
-		active.setCommandId(CMPP_ACTIVE_TEST) 
-		active.setSequenceId(cmppUtil.getSequenceId()) #序列，由我们指定
+		if sockFd <= 0 :
+			activeTestObj = cmppActiveTest()
+			active.setTotalLength(12) #消息总长度，总字节数:4+4+4(消息头)
+			active.setCommandId(CMPP_ACTIVE_TEST) 
+			active.setSequenceId(cmppUtil.getSequenceId()) #序列，由我们指定
 
-		activeTestMessage = activeTestObj.writeToByteBuffer()
+			activeTestMessage = activeTestObj.writeToByteBuffer()
 
-		sendObj = cmppSender(sockFd, activeTestMessage)
-		return sendObj.sendService()
+			sendObj = cmppSender(sockFd, activeTestMessage)
+			return sendObj.sendService()
+		else:
+			print('sendActiveTest sockFd error:' + sockFd)
 
 	#心跳回应处理
 	staticmethod
@@ -107,9 +110,9 @@ class cmppHandle(object):
 
 
 	##心跳服务
-	def service():
+	def service(sockFd):
 		thread_list =[]
-		thread1 = threading.Thread(target=cmppHandle.sendActiveTest, args='')
+		thread1 = threading.Thread(target=cmppHandle.sendActiveTest, args=sockFd)
 		thread_list.append(thread1)
 
 		for t in thread_list:

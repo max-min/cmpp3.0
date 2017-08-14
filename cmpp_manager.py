@@ -25,11 +25,11 @@ class cmppManager(object):
 	def submitMessage(message, number):
 		if cmppManager.connectedISMG != True:
 			cmppManager.initConfig()
-			sockFd = cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT)
-			if  sockFd <= 0:
+			ret,sockFd = cmppHandle.connectISMG(cmppManager.IP, cmppManager.PORT)
+			if  ret == 0 and sockFd > 0:
 				cmppManager.connectedISMG = True
 				#认证成功后，开启新的现场进行保活处理
-				cmppHandle.service()
+				cmppHandle.service(sockFd)
 			else :
 				print('connected ISMG failed')
 				cmppManager.connectedISMG = False
